@@ -28,6 +28,13 @@ vim.filetype.add({
         templ = 'templ',
     }
 })
+do
+    local orig = vim.api.nvim_set_current_dir
+    vim.api.nvim_set_current_dir = function(dir)
+        vim.notify("nvim_set_current_dir -> " .. dir .. "\n" .. debug.traceback("", 2))
+        return orig(dir)
+    end
+end
 
 local grp = vim.api.nvim_create_augroup("BuildCmd", { clear = true })
 
