@@ -20,7 +20,8 @@ return {
                 javascript = { 'prettier' },
                 python = { 'black' },
                 lua = { 'stylua' },
-                markdown = { 'prettier' }
+                markdown = { 'prettier' },
+                sh = { 'shfmt' }
             }
         })
         local cmp = require('cmp')
@@ -35,6 +36,7 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
+                "bashls",
                 "clangd",
                 "asm_lsp",
                 "basedpyright",
@@ -67,6 +69,11 @@ return {
                     vim.g.zig_fmt_parse_errors = 0
                     vim.g.zig_fmt_autosave = 0
                 end,
+                ["bashls"] = function()
+                    local bashlsp = require("bashls")
+
+                    bashlsp.setup({})
+                end,
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
@@ -89,15 +96,15 @@ return {
                 ["rust_analyzer"] = function()
                     local lspconfig = require("lspconfig")
                     require("lspconfig").rust_analyzer.setup({
-          settings = {
-            ["rust-analyzer"] = {
-              cargo = {
-                features = { "std" },
-              },
-            },
-          },
-        })
-                    end,
+                        settings = {
+                            ["rust-analyzer"] = {
+                                cargo = {
+                                    features = { "std" },
+                                },
+                            },
+                        },
+                    })
+                end,
                 ["asm_lsp"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.asm_lsp.setup({})

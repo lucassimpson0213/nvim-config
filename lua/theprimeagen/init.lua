@@ -48,6 +48,30 @@ vim.api.nvim_create_autocmd({ "BufEnter", "DirChanged" }, {
 })
 
 
+
+local bash = vim.api.nvim_create_augroup("BashCmd", { clear = true })
+
+vim.api.nvim_create_autocmd("BufNewFile", {
+    pattern = "*.sh",
+    group = bash,
+    callback = function()
+        local lines = {
+            "#!/usr/bin/env bash",
+            "set -Eeuo pipefail",
+            "IFS=$'\\n\\t'",
+            "",
+            "main() {",
+            "  ",
+            "}",
+            "",
+            "main \"$@\"",
+        }
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    end,
+})
+
+
+
 autocmd('TextYankPost', {
     group = yank_group,
     pattern = '*',
