@@ -23,6 +23,9 @@ function R(name)
     require("plenary.reload").reload_module(name)
 end
 
+vim.o.guifont = "Iosevka:h13,JetBrainsMono Nerd Font:h13"
+
+
 vim.filetype.add({
     extension = {
         templ = 'templ',
@@ -89,15 +92,140 @@ autocmd({ "BufWritePre" }, {
     command = [[%s/\s\+$//e]],
 })
 
-autocmd('BufEnter', {
+local function set_cs(name)
+    pcall(vim.cmd.colorscheme, name)
+end
+
+-- Systems stay Storm (no override needed), but here's how if you want:
+vim.api.nvim_create_autocmd("FileType", {
     group = ThePrimeagenGroup,
-    callback = function()
-        if vim.bo.filetype == "zig" then
-            pcall(vim.cmd.colorscheme, "tokyonight-night")
-        else
-            pcall(vim.cmd.colorscheme, "rose-pine-moon")
-        end
-    end
+    pattern = { "rust", "c", "cpp", "asm", "nasm" },
+    callback = function() set_cs("tokyonight-storm") end,
+})
+
+-- Bash / shell
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = { "sh", "bash", "zsh" },
+    callback = function() set_cs("everforest") end,
+})
+
+-- Go
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = "go",
+    callback = function() set_cs("catppuccin-macchiato") end,
+})
+
+-- Web
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact", "html", "css", "scss", "vue" },
+    callback = function() set_cs("rose-pine-moon") end,
+})
+
+-- Python
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = "python",
+    callback = function() set_cs("tokyonight-moon") end,
+})
+
+-- Markdown / writing
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = { "markdown", "text" },
+    callback = function() set_cs("catppuccin-latte") end,
+})
+local function set_cs(name)
+    pcall(vim.cmd.colorscheme, name)
+end
+
+-- Systems stay Storm (no override needed), but here's how if you want:
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = { "rust", "c", "cpp", "asm", "nasm" },
+    callback = function() set_cs("tokyonight-storm") end,
+})
+
+-- Bash / shell
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = { "sh", "bash", "zsh" },
+    callback = function() set_cs("everforest") end,
+})
+
+-- Go
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = "go",
+    callback = function() set_cs("catppuccin-macchiato") end,
+})
+
+-- Web
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact", "html", "css", "scss", "vue" },
+    callback = function() set_cs("rose-pine-moon") end,
+})
+
+-- Python
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = "python",
+    callback = function() set_cs("tokyonight-moon") end,
+})
+
+-- Markdown / writing
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = { "markdown", "text" },
+    callback = function() set_cs("catppuccin-latte") end,
+})
+local function set_cs(name)
+    pcall(vim.cmd.colorscheme, name)
+end
+
+-- Systems stay Storm (no override needed), but here's how if you want:
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = { "rust", "c", "cpp", "asm", "nasm" },
+    callback = function() set_cs("tokyonight-storm") end,
+})
+
+-- Bash / shell
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = { "sh", "bash", "zsh" },
+    callback = function() set_cs("everforest") end,
+})
+
+-- Go
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = "go",
+    callback = function() set_cs("catppuccin-macchiato") end,
+})
+
+-- Web
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact", "html", "css", "scss", "vue" },
+    callback = function() set_cs("rose-pine-moon") end,
+})
+
+-- Python
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = "python",
+    callback = function() set_cs("tokyonight-moon") end,
+})
+
+-- Markdown / writing
+vim.api.nvim_create_autocmd("FileType", {
+    group = ThePrimeagenGroup,
+    pattern = { "markdown", "text" },
+    callback = function() set_cs("catppuccin-latte") end,
 })
 
 
@@ -121,3 +249,7 @@ autocmd('LspAttach', {
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
+
+
+
+vim.cmd.colorscheme("tokyonight-storm")

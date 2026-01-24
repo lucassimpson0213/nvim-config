@@ -37,7 +37,6 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "bashls",
-                "clangd",
                 "asm_lsp",
                 "basedpyright",
                 "lua_ls",

@@ -14,12 +14,6 @@
 -- vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>")
 --
 --
--- vim.keymap.set("n", "<leader>vwm", function()
---     require("vim-with-me").StartVimWithMe()
--- end)
--- vim.keymap.set("n", "<leader>svwm", function()
---     require("vim-with-me").StopVimWithMe()
--- end)
 -- vim.keymap.set("n", "<leader>lt", function()
 --     vim.cmd [[ PlenaryBustedFile % ]]
 -- end)
@@ -89,13 +83,19 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Join Lines Keep Cursor" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll Down Centered" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll Up Centered" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next Search Result Centered" })
+vim.keymap.set("n", "<leader>vwm", function()
+    require("vim-with-me").StartVimWithMe()
+end)
+vim.keymap.set("n", "<leader>svwm", function()
+    require("vim-with-me").StopVimWithMe()
+end)
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev Search Result Centered" })
 vim.keymap.set("n", "=ap", "ma=ap'a", { desc = "Auto Indent Paragraph" })
 vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
 
 vim.keymap.set("n", "<leader>lt", function() vim.cmd [[ PlenaryBustedFile % ]] end, { desc = "Test Current Lua File" })
 
-vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste Without Losing Clipboard" })
+vim.keymap.set("x", "<leader>pa", [["_dP]], { desc = "Paste Without Losing Clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to System Clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank Line to System Clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d", { desc = "Delete to Void Register" })
@@ -179,7 +179,6 @@ end, { desc = "Run current rust file" })
 
 
 
-vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope projects<CR>")
 
 vim.keymap.set("n", "<leader>KH", function()
     vim.lsp.buf.hover({ focusable = true })
@@ -242,3 +241,55 @@ vim.keymap.set("n", "<leader>qd", function()
     vim.diagnostic.setqflist()
     vim.cmd("copen")
 end)
+
+
+
+vim.keymap.set("n", "<leader>hr", function()
+    require("harpoon.mark").clear_all()
+    print("Harpoon reset")
+end)
+
+vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from System Clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>P", [["+P]], { desc = "Paste before (System Clipboard)" })
+vim.filetype.add({
+    pattern = {
+        ["^#!.*bash"] = "sh",
+        ["^#!.*python"] = "python",
+    },
+
+})
+local function tms(args)
+    if vim.env.TMUX == nil then
+        vim.notify("Not inside tmux", vim.log.levels.WARN)
+        return
+    end
+    vim.fn.system(vim.list_extend({ "tmux", "neww", "tmux-sessionizer" }, args))
+end
+
+vim.keymap.set("n", "<C-f>", function() tms({}) end)
+vim.keymap.set("n", "<M-h>", function() tms({ "-s", "0" }) end)
+vim.keymap.set("n", "<M-t>", function() tms({ "-s", "1" }) end)
+vim.keymap.set("n", "<M-n>", function() tms({ "-s", "2" }) end)
+vim.keymap.set("n", "<M-s>", function() tms({ "-s", "3" }) end)
+
+
+local function require_count(key)
+    return function()
+        if vim.v.count == 0 then
+            vim.notify("Use a count (e.g. 5" .. key .. ")", vim.log.levels.WARN)
+            return ""
+        end
+        return vim.v.count .. key
+    end
+end
+
+vim.keymap.set("n", "h", require_count("h"), { expr = true, silent = true })
+vim.keymap.set("n", "j", require_count("j"), { expr = true, silent = true })
+vim.keymap.set("n", "k", require_count("k"), { expr = true, silent = true })
+vim.keymap.set("n", "l", require_count("l"), { expr = true, silent = true })
+
+
+
+-- Disable easy-outs
+vim.keymap.set("n", "dd", "<nop>", { silent = true })
+vim.keymap.set("n", "cc", "<nop>", { silent = true })
