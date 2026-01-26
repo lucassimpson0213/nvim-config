@@ -258,21 +258,6 @@ vim.filetype.add({
     },
 
 })
-local function tms(args)
-    if vim.env.TMUX == nil then
-        vim.notify("Not inside tmux", vim.log.levels.WARN)
-        return
-    end
-    vim.fn.system(vim.list_extend({ "tmux", "neww", "tmux-sessionizer" }, args))
-end
-
-vim.keymap.set("n", "<C-f>", function() tms({}) end)
-vim.keymap.set("n", "<M-h>", function() tms({ "-s", "0" }) end)
-vim.keymap.set("n", "<M-t>", function() tms({ "-s", "1" }) end)
-vim.keymap.set("n", "<M-n>", function() tms({ "-s", "2" }) end)
-vim.keymap.set("n", "<M-s>", function() tms({ "-s", "3" }) end)
-
-
 local function require_count(key)
     return function()
         if vim.v.count == 0 then
@@ -283,13 +268,59 @@ local function require_count(key)
     end
 end
 
-vim.keymap.set("n", "h", require_count("h"), { expr = true, silent = true })
-vim.keymap.set("n", "j", require_count("j"), { expr = true, silent = true })
-vim.keymap.set("n", "k", require_count("k"), { expr = true, silent = true })
-vim.keymap.set("n", "l", require_count("l"), { expr = true, silent = true })
-
 
 
 -- Disable easy-outs
 vim.keymap.set("n", "dd", "<nop>", { silent = true })
 vim.keymap.set("n", "cc", "<nop>", { silent = true })
+
+
+local function smart_jk(key)
+    return function()
+        if vim.v.count == 0 then
+            return "g" .. key               -- gj / gk (logical)
+        end
+        return tostring(vim.v.count) .. key -- 5j / 5k (absolute)
+    end
+end
+
+
+local function count_only(key)
+    return function()
+        -- If this is a `g`-motion (gj / gk), allow it
+        if vim.v.operator == "g" then
+            return "g" .. key
+        end
+
+        -- No count: do nothing
+        if vim.v.count == 0 then
+            return ""
+        end
+
+        -- With count: real line movement
+        return key
+    end
+end
+
+local function require_count_gmotion(key) -- key is "j" or "k"
+    return function()
+        if vim.v.count == 0 then
+            return ""     -- no-op unless a count is provided
+        end
+        return "g" .. key -- Vim will prefix the count automatically -> {count}gj / {count}gk
+    end
+end
+
+vim.keymap.set("n", "j", require_count_gmotion("j"), { expr = true, silent = true })
+vim.keymap.set("n", "k", require_count_gmotion("k"), { expr = true, silent = true })
+
+
+
+
+
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
+vim.keymap.set("n", "V", "<Cmd>echo 'Use text objects'<CR>")
+vim.keymap.set("n", "<C-v>", "<Cmd>echo 'Use text objects'<CR>")
+
+vim.keymap.set("n", "v", "<Nop>")
