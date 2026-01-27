@@ -324,3 +324,48 @@ vim.keymap.set("n", "V", "<Cmd>echo 'Use text objects'<CR>")
 vim.keymap.set("n", "<C-v>", "<Cmd>echo 'Use text objects'<CR>")
 
 vim.keymap.set("n", "v", "<Nop>")
+
+
+
+
+
+
+
+
+
+
+local function term_exec(cmd)
+    local ok, toggleterm = pcall(require, "toggleterm")
+    if not ok then
+        vim.notify("toggleterm not loaded yet", vim.log.levels.WARN)
+        return
+    end
+    toggleterm.exec(cmd, 1)
+end
+
+
+
+vim.keymap.set("n", "<leader>zz", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
+
+vim.keymap.set("n", "<leader>c", "<cmd>TermExec cmd='cargo check'<cr>", { desc = "Cargo check" })
+vim.keymap.set("n", "<leader>t", "<cmd>TermExec cmd='cargo test'<cr>", { desc = "Cargo test" })
+vim.keymap.set("n", "<leader>r", "<cmd>TermExec cmd='!!'<cr>", { desc = "Rerun last' " })
+
+vim.keymap.set(
+    "n",
+    "<leader>zz",
+    "<cmd>ToggleTerm<cr>",
+    { desc = "Toggle terminal" }
+)
+
+
+-- Toggle the terminal
+
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+
+
+-- vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
+
+-- vim.keymap.set("n", "<leader>c", term.cargo_check, { desc = "Cargo check" })
+-- vim.keymap.set("n", "<leader>t", term.cargo_test, { desc = "Cargo test" })
+--  im.keymap.set("n", "<leader>r", term.rerun, { desc = "Rerun last command" })
