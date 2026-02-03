@@ -36,6 +36,7 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
+
                 "bashls",
                 "asm_lsp",
                 "basedpyright",
@@ -92,13 +93,20 @@ return {
                         }
                     }
                 end,
+                ["clangd"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.clangd.setup({
+                        cmd = { "clangd", "--background-index", "--clang-tidy" },
+                    })
+                end,
                 ["rust_analyzer"] = function()
                     local lspconfig = require("lspconfig")
                     require("lspconfig").rust_analyzer.setup({
                         settings = {
                             ["rust-analyzer"] = {
                                 cargo = {
-                                    features = { "std" },
+                                    target = "targets/i686-os.json",
+                                    buildScripts = { enable = false },
                                 },
                             },
                         },
@@ -118,6 +126,10 @@ return {
             }
         })
 
+        require("lspconfig").clangd.setup({
+            capabilities = capabilities,
+            cmd = { "clangd", "--background-index", "--clang-tidy" },
+        })
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
