@@ -369,3 +369,4 @@ vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 -- vim.keymap.set("n", "<leader>c", term.cargo_check, { desc = "Cargo check" })
 -- vim.keymap.set("n", "<leader>t", term.cargo_test, { desc = "Cargo test" })
 --  im.keymap.set("n", "<leader>r", term.rerun, { desc = "Rerun last command" })
+--  :x
