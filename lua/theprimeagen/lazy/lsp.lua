@@ -36,7 +36,7 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-
+                "latex",
                 "bashls",
                 "asm_lsp",
                 "basedpyright",
@@ -105,7 +105,7 @@ return {
                         settings = {
                             ["rust-analyzer"] = {
                                 cargo = {
-                                    target = "targets/i686-os.json",
+                                    target = "i686-os.json",
                                     buildScripts = { enable = false },
                                 },
                             },

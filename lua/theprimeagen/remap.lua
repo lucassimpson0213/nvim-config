@@ -320,10 +320,10 @@ vim.keymap.set("n", "k", require_count_gmotion("k"), { expr = true, silent = tru
 
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
-vim.keymap.set("n", "V", "<Cmd>echo 'Use text objects'<CR>")
-vim.keymap.set("n", "<C-v>", "<Cmd>echo 'Use text objects'<CR>")
 
-vim.keymap.set("n", "v", "<Nop>")
+
+
+
 
 
 
@@ -370,3 +370,4 @@ vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 -- vim.keymap.set("n", "<leader>t", term.cargo_test, { desc = "Cargo test" })
 --  im.keymap.set("n", "<leader>r", term.rerun, { desc = "Rerun last command" })
 --  :x
+--
