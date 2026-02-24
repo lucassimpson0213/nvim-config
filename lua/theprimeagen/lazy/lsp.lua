@@ -154,7 +154,32 @@ return {
         })
 
         vim.diagnostic.config({
-            -- update_in_insert = true,
+            signs = true,
+
+            -- keep the red underline
+            underline = true,
+
+            -- this is the IMPORTANT part (short inline message)
+            virtual_text = {
+                current_line = true, -- only show for the line your cursor is on
+                spacing = 2,
+                prefix = "●", -- small symbol before message
+
+                -- shorten Rust's long essays into useful hints
+                format = function(diagnostic)
+                    local msg = diagnostic.message
+                    msg = msg:gsub("\n", " ")  -- remove newlines
+                    msg = msg:gsub("%s+", " ") -- collapse whitespace
+                    return msg
+                end,
+            },
+
+            -- DO NOT insert whole extra lines under code
+            virtual_lines = false,
+
+            -- don't update while typing (prevents flicker)
+            update_in_insert = false,
+
             float = {
                 focusable = false,
                 style = "minimal",
