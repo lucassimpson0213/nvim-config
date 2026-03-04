@@ -364,7 +364,7 @@ vim.keymap.set("n", "<leader>od", function()
 end, { desc = "Open @doc note" })
 
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("habamax")
+
 
 
 -- Automatically start Rustowl whenever a Rust file is opened
