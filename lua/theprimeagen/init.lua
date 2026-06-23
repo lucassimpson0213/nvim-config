@@ -23,8 +23,12 @@ function R(name)
     require("plenary.reload").reload_module(name)
 end
 
-vim.o.guifont = "Iosevka:h13,JetBrainsMono Nerd Font:h13"
-vim.cmd.colorscheme("catppuccin")
+vim.o.guifont = "Atkinson Hyperlegible Mono:h14,JetBrainsMono Nerd Font:h14"
+vim.opt.linespace = 3
+vim.opt.cursorline = true
+vim.opt.termguicolors = true
+-- vim.cmd.colorscheme("cappuccin")
+vim.cmd.colorscheme("cyberdream")
 
 
 vim.filetype.add({
