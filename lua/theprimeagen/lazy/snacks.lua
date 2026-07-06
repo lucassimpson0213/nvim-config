@@ -25,4 +25,7 @@ return {
         scope = { enabled = false },
         words = { enabled = false },
     },
+    keys = {
+        { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+    }
 }

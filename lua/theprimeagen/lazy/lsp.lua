@@ -21,7 +21,8 @@ return {
                 python = { 'black' },
                 lua = { 'stylua' },
                 markdown = { 'prettier' },
-                sh = { 'shfmt' }
+                sh = { 'shfmt' },
+
             }
         })
         local cmp = require('cmp')
@@ -36,15 +37,13 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "latex",
                 "bashls",
-                "asm_lsp",
                 "basedpyright",
                 "lua_ls",
                 "rust_analyzer",
-                "gopls",
                 "vtsls",
                 "tailwindcss",
+
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -68,11 +67,6 @@ return {
                     })
                     vim.g.zig_fmt_parse_errors = 0
                     vim.g.zig_fmt_autosave = 0
-                end,
-                ["bashls"] = function()
-                    local bashlsp = require("bashls")
-
-                    bashlsp.setup({})
                 end,
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
@@ -126,10 +120,6 @@ return {
             }
         })
 
-        require("lspconfig").clangd.setup({
-            capabilities = capabilities,
-            cmd = { "clangd", "--background-index", "--clang-tidy" },
-        })
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({

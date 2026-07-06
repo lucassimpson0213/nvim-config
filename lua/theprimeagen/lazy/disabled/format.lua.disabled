@@ -4,6 +4,7 @@ return {
     config = function()
         local conform = require("conform")
 
+        -- conditonal
         conform.setup({
             formatters_by_ft = {
                 lua = { "stylua" },
@@ -13,6 +14,7 @@ return {
                 python = { "black" },
                 sh = { "shfmt" },
                 bash = { "shfmt" },
+
             },
             format_on_save = {
                 lsp_fallback = true,

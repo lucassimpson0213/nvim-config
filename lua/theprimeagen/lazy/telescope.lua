@@ -27,12 +27,12 @@ return {
             },
         })
 
-        telescope.load_extension('projects')
 
 
 
 
-        telescope.load_extension('projects')
+
+
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = "find files with telescope" })
