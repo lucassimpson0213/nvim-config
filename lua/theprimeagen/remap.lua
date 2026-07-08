@@ -57,12 +57,6 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" }
 
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = { '*.py', '*.ts', '*.rs' }, -- Apply to sum them
-    callback = function()
-        require("conform").format({ lsp_fallback = false})
-    end,
-})
 
 
 
