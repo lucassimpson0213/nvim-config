@@ -15,6 +15,13 @@ return {
 					"jsdoc",
 					"bash",
 					"go",
+					"vim",
+					"regex",
+					"markdown",
+					"markdown_inline",
+					"json",
+					"html",
+					"css",
 				},
 
 				-- Install parsers synchronously (only applied to `ensure_installed`)
