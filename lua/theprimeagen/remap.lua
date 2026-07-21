@@ -57,7 +57,13 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" }
 
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 
-
+vim.keymap.set("n", "<leader>oo", function()
+  vim.fn.jobstart({
+    "doom",
+    "emacs",
+    "~/org/tasks.org"
+  }, { detach = false })
+end)
 
 
 

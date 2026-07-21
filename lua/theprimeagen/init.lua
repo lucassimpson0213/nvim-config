@@ -40,7 +40,10 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
 })
 
-
+vim.keymap.set("n", "<leader>oe", function()
+  vim.cmd("terminal doom emacs -nw")
+    vim.cmd("suspend")
+end)
 
 local grp = vim.api.nvim_create_augroup("BuildCmd", { clear = true })
 
