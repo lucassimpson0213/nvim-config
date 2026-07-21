@@ -15,7 +15,7 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev Search Result Centered" })
 vim.keymap.set("n", "=ap", "ma=ap'a", { desc = "Auto Indent Paragraph" })
 vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
 
-vim.keymap.set("n", "<leader>lt", function() vim.cmd [[ PlenaryBustedFile % ]] end, { desc = "Test Current Lua File" })
+
 
 vim.keymap.set("x", "<leader>pa", [["_dP]], { desc = "Paste Without Losing Clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to System Clipboard" })

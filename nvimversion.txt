@@ -1,0 +1,6 @@
+NVIM v0.11.6
+Build type: RelWithDebInfo
+LuaJIT 2.1.1767980792
+Run "nvim -V1 -v" for more info
+lssimp1@CPC-USE-S05ZUOO:~/.config/nvim$
+
