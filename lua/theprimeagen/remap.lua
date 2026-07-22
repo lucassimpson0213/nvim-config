@@ -5,12 +5,6 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Join Lines Keep Cursor" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll Down Centered" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll Up Centered" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next Search Result Centered" })
-vim.keymap.set("n", "<leader>vwm", function()
-    require("vim-with-me").StartVimWithMe()
-end)
-vim.keymap.set("n", "<leader>svwm", function()
-    require("vim-with-me").StopVimWithMe()
-end)
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev Search Result Centered" })
 vim.keymap.set("n", "=ap", "ma=ap'a", { desc = "Auto Indent Paragraph" })
 vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
@@ -36,11 +30,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc =
 
 vim.keymap.set("n", "<leader><leader>", function() vim.cmd("so") end, { desc = "Source Config" })
 -- <leader>vkw = View Key Work (or whatever mnemonic you like)
-vim.keymap.set("n", "<leader>vkw", function()
-    vim.cmd("vsplit")
-    vim.cmd("edit ~/.config/nvim/lua/theprimeagen/remap.lua") -- Adjust path!
-    vim.cmd("norm G")                                         -- Jump to bottom to add new ones
-end)
 
 -- Standard Window Navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window" })
@@ -57,13 +46,6 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" }
 
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 
-vim.keymap.set("n", "<leader>oo", function()
-  vim.fn.jobstart({
-    "doom",
-    "emacs",
-    "~/org/tasks.org"
-  }, { detach = false })
-end)
 
 
 
@@ -103,20 +85,6 @@ vim.keymap.set("n", "[l", "<cmd>lprev<cr>", { desc = "Loclist prev" })
 vim.keymap.set("n", "]l", "<cmd>lnext<cr>", { desc = "Loclist next" })
 vim.keymap.set("n", "<leader>lo", "<cmd>lopen<cr>", { desc = "Loclist open" })
 vim.keymap.set("n", "<leader>lc", "<cmd>lclose<cr>", { desc = "Loclist close" })
-local function qf_run(cmd)
-    local out = vim.fn.systemlist({ "bash", "-lc", cmd .. " 2>&1" })
-    if #out == 0 then out = { "(no output)" } end
-
-    vim.fn.setqflist({}, "r", { title = cmd, lines = out })
-    vim.cmd("copen")
-end
-
-
-vim.keymap.set("n", "<leader>!", function()
-    local cmd = vim.fn.input("QF $ ")
-    if cmd ~= "" then qf_run(cmd) end
-end, { desc = "Run anything -> quickfix" })
-
 
 
 
@@ -135,14 +103,9 @@ vim.filetype.add({
 
 })
 
-
-
 -- Disable easy-outs
 vim.keymap.set("n", "dd", "<nop>", { silent = true })
 vim.keymap.set("n", "cc", "<nop>", { silent = true })
-
-
-
 
 
 local function require_count_gmotion(key) -- key is "j" or "k"
@@ -158,19 +121,9 @@ vim.keymap.set("n", "j", require_count_gmotion("j"), { expr = true, silent = tru
 vim.keymap.set("n", "k", require_count_gmotion("k"), { expr = true, silent = true })
 
 
-
-
-
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 
-
-
-vim.keymap.set("n", "<leader>zz", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
-
-vim.keymap.set("n", "<leader>c", "<cmd>TermExec cmd='cargo check'<cr>", { desc = "Cargo check" })
-vim.keymap.set("n", "<leader>t", "<cmd>TermExec cmd='cargo test'<cr>", { desc = "Cargo test" })
-vim.keymap.set("n", "<leader>r", "<cmd>TermExec cmd='!!'<cr>", { desc = "Rerun last' " })
 
 vim.keymap.set(
     "n",
@@ -185,10 +138,3 @@ vim.keymap.set(
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 
 
--- vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
-
--- vim.keymap.set("n", "<leader>c", term.cargo_check, { desc = "Cargo check" })
--- vim.keymap.set("n", "<leader>t", term.cargo_test, { desc = "Cargo test" })
---  im.keymap.set("n", "<leader>r", term.rerun, { desc = "Rerun last command" })
---  :x
---

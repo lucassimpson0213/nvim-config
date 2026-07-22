@@ -2,20 +2,24 @@ require("theprimeagen.set")
 require("theprimeagen.remap")
 require("theprimeagen.lazy_init")
 
--- DO.not
--- DO NOT INCLUDE THIS
 
--- If i want to keep doing lsp debugging
--- function restart_htmx_lsp()
---     require("lsp-debug-tools").restart({ expected = {}, name = "htmx-lsp", cmd = { "htmx-lsp", "--level", "DEBUG" }, root_dir = vim.loop.cwd(), });
--- end
 
--- DO NOT INCLUDE THIS
--- DO.not
 
+
+
+
+
+
+
+
+
+local emacs = require("theprimeagen.emacs")
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})
 
+
+
+emacs.set_doom_emacs_virt_term()
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
@@ -33,28 +37,6 @@ end
 
 vim.o.guifont = "Iosevka:h13,JetBrainsMono Nerd Font:h13"
 vim.cmd.colorscheme("cyberdream")
-
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        vim.o.guicursor = ""
-    end,
-})
-
-vim.keymap.set("n", "<leader>oe", function()
-  vim.cmd("terminal doom emacs -nw")
-    vim.cmd("suspend")
-end)
-
-local grp = vim.api.nvim_create_augroup("BuildCmd", { clear = true })
-
-vim.api.nvim_create_autocmd({ "BufEnter", "DirChanged" }, {
-    group = grp,
-    callback = function()
-        if vim.fn.findfile("Cargo.toml", ".;") ~= "" then
-            vim.opt.makeprg = "cargo build --message-format=short"
-        end
-    end,
-})
 
 
 
@@ -172,6 +154,3 @@ vim.keymap.set('n', '<leader>l', function()
 end, { noremap = true, silent = true })
 
 
-vim.keymap.set('n', '<leader>lc', function()
-    vim.cmd('cclose')
-end)

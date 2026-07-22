@@ -2,30 +2,67 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+
     opts = {
-        -- Core UI polish
         notifier = { enabled = true },
         input = { enabled = true },
 
-        -- Light opinionation that doesn't change how you navigate
         indent = { enabled = true },
         statuscolumn = { enabled = true },
         scroll = { enabled = true },
 
-        -- Startup nicety (only shows when you open nvim with no file)
-        dashboard = { enabled = true },
+        dashboard = {
+            enabled = true,
 
-        -- Performance helpers (generally safe)
+            preset = {
+                keys = {
+                    {
+                        icon = " ",
+                        key = "o",
+                        desc = "Org Capture",
+                        action = function()
+                            vim.cmd("vsplit")
+                            vim.cmd("terminal doom emacs")
+                        end,
+                    },
+                    {
+                       icon = "",
+                       key = "c",
+                       desc = "Neovim Config",
+                       action = function()
+                            vim.cmd("cd ~/.config/nvim")
+                            Snacks.picker.files()
+                        end
+                    }
+                },
+            },
+        },
+
         bigfile = { enabled = true },
         quickfile = { enabled = true },
 
-        -- Leave these off unless you want workflow changes
-        picker = { enabled = false },   -- keep Telescope/your setup
-        explorer = { enabled = false }, -- no file tree
+        picker = { enabled = true },
+        explorer = { enabled = false },
         scope = { enabled = false },
-        words = { enabled = false },
+
+        words = { enabled = true },
+        lazygit = { enabled = true },
     },
+
     keys = {
-        { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
-    }
+        {
+            "<leader>n",
+            function()
+                Snacks.notifier.show_history()
+            end,
+            desc = "Notification History",
+        },
+
+        {
+            "<leader>ps",
+            function()
+                Snacks.picker.files()
+            end,
+        },
+    },
 }
