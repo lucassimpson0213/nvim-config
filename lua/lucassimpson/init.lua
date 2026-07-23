@@ -1,6 +1,6 @@
-require("theprimeagen.set")
-require("theprimeagen.remap")
-require("theprimeagen.lazy_init")
+require("lucassimpson.set")
+require("lucassimpson.remap")
+require("lucassimpson.lazy_init")
 
 
 
@@ -13,7 +13,7 @@ require("theprimeagen.lazy_init")
 
 
 
-local emacs = require("theprimeagen.emacs")
+local emacs = require("lucassimpson.emacs")
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})
 
