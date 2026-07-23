@@ -2,17 +2,6 @@ require("lucassimpson.set")
 require("lucassimpson.remap")
 require("lucassimpson.lazy_init")
 
-
-
-
-
-
-
-
-
-
-
-
 local emacs = require("lucassimpson.emacs")
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})
@@ -94,12 +83,6 @@ autocmd('LspAttach', {
     end
 })
 
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
-
-
-
 
 vim.g.markdown_fenced_languages = {
     "ts=typescript",
@@ -117,15 +100,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-
-
-
-
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        vim.notify("Use vin / van when selecting code", vim.log.levels.INFO)
-    end,
-})
 
 -- linting for cloudformation, you have to enable globstar first
 vim.opt.termguicolors = true
