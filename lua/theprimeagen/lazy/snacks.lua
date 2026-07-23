@@ -33,6 +33,14 @@ return {
                             vim.cmd("cd ~/.config/nvim")
                             Snacks.picker.files()
                         end
+                    },
+                    {
+                        icon = "",
+                        key = "g",
+                        desc = "Lazygit",
+                        action = function ()
+                            Snacks.lazygit()
+                        end,
                     }
                 },
             },
