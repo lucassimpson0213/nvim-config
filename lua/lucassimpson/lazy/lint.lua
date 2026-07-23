@@ -21,7 +21,6 @@ return {
         lint.linters_by_ft = {
             sh = { "shellcheck" },
             python = { "ruff" },
-            typescript = { "eslint_d" },
             json = { "jsonlint" },
             yaml = { "cfn_lint" },
             yml = { "cfn_lint" }

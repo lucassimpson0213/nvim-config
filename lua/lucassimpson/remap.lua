@@ -40,9 +40,6 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window" })
 vim.keymap.set("n", "<leader>>", "=ap", { desc = "Indent paragraph" })
 vim.keymap.set("n", "<leader><", "=ap", { desc = "Unindent paragraph" }
 )
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic" })
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 
