@@ -26,10 +26,10 @@ return {
                         end,
                     },
                     {
-                       icon = "",
-                       key = "c",
-                       desc = "Neovim Config",
-                       action = function()
+                        icon = "",
+                        key = "c",
+                        desc = "Neovim Config",
+                        action = function()
                             vim.cmd("cd ~/.config/nvim")
                             Snacks.picker.files()
                         end
@@ -38,8 +38,16 @@ return {
                         icon = "",
                         key = "g",
                         desc = "Lazygit",
-                        action = function ()
+                        action = function()
                             Snacks.lazygit()
+                        end,
+                    },
+                    {
+                        icon = " ",
+                        key = "d",
+                        desc = "Diagnostics",
+                        action = function()
+                            Snacks.picker.diagnostics()
                         end,
                     }
                 },
