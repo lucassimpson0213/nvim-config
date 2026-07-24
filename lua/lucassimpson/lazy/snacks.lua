@@ -1,3 +1,4 @@
+local picker = require('lspicker')
 return {
     "folke/snacks.nvim",
     priority = 1000,
@@ -80,5 +81,11 @@ return {
                 Snacks.picker.files()
             end,
         },
+        {
+            "<leader>g",
+            function()
+                picker.LspPicker(Snacks)
+            end
+        }
     },
 }
