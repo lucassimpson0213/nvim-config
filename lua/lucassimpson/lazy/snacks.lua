@@ -1,4 +1,3 @@
-local picker = require('lspicker')
 return {
     "folke/snacks.nvim",
     priority = 1000,
@@ -84,6 +83,9 @@ return {
         {
             "<leader>g",
             function()
+                local cwd = vim.fn.getcwd()
+                print(cwd)
+                local picker = require('lucassimpson.config.lspicker')
                 picker.LspPicker(Snacks)
             end
         }
