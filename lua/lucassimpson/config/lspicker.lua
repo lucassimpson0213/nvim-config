@@ -8,12 +8,32 @@
 --   "Code Actions",
 --   "Rename",
 -- }
---
-local M = {}
-function M.LspPicker(snacks)
+--:let key = nvim_replace_termcodes('<C-o>', v:true, v:false, v:true)
 
+-- :call nvim_feedkeys(key, 'n', v:false)
+-- This is what we got for an api call for replacing termcodes
+local M = {}
+
+function back()
+    vim.notify("back was called")
+    vim.cmd.normal("<C-o>")
+end
+
+function forward()
+    vim.notify("forward function was called")
+    -- I think that we need to schedule this to execute after the picker closes
+    vim.cmd.normal("<C-i>")
+end
+
+function jumplist()
+    local jumps, current = vim.fn.getjumplist()
+    print(jumps[0])
+    print(current)
+end
+
+function M.LspPicker(snacks)
     local function format_item(item)
-    return item.name
+        return item.name
     end
 
     local actions = {
@@ -49,9 +69,21 @@ function M.LspPicker(snacks)
             name = "Rename",
             run = vim.lsp.buf.rename,
         },
+        {
+            name = "go back",
+            run = back
+        },
+        {
+            name = "jump forward",
+            run = forward
+        },
+        {
+            name = "jumplist",
+            run = jumplist
+        }
     }
 
-    local picker = snacks.picker.select(actions, {format_item = format_item}, function(item, idx)
+    local picker = snacks.picker.select(actions, { format_item = format_item }, function(item, idx)
         item.run()
     end)
     print(picker)
