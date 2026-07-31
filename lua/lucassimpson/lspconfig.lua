@@ -14,6 +14,42 @@ function M.lspconf()
         capabilities = capabilities,
     })
 
+    vim.lsp.config("cfn_lsp", {
+        cmd = {
+            "node",
+            "/home/lssimp1/COM/bin/cfn-lsp-server-standalone.js",
+            "--stdio",
+        },
+
+        filetypes = {
+            "json",
+            "yaml",
+            "yml",
+            "cfn",
+            "template",
+        },
+
+        root_dir = function(bufnr, on_dir)
+            local root = vim.fs.root(bufnr, { ".git", "package.json" })
+            on_dir(root or vim.fn.getcwd())
+        end,
+
+        init_options = {
+            aws = {
+                clientInfo = {
+                    extension = {
+                        name = "neovim",
+                        version = vim.version().major
+                            .. "."
+                            .. vim.version().minor,
+                    },
+                },
+                telemetryEnabled = true,
+            },
+        },
+    })
+
+    vim.lsp.enable("cfn_lsp")
     require("mason").setup()
     require("mason-lspconfig").setup({
         ensure_installed = {
@@ -23,6 +59,7 @@ function M.lspconf()
             "rust_analyzer",
             "vtsls",
             "tailwindcss",
+
 
         },
         automatic_enable = true
