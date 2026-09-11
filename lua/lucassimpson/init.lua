@@ -25,7 +25,7 @@ function R(name)
 end
 
 vim.o.guifont = "Iosevka:h13,JetBrainsMono Nerd Font:h13"
-vim.cmd.colorscheme("melange")
+ require('matugen').setup()
 
 
 
@@ -70,7 +70,7 @@ autocmd('LspAttach', {
     group = ThePrimeagenGroup,
     callback = function(e)
         local opts = { buffer = e.buf }
-        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts, { desc = "go to definition" })
+        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() vim.notify("Use ctrl-i and ctrl-o for forward and back with the jumplist") end, opts, { desc = "go to definition" })
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts, { desc = "definition/doc hover" })
         vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
         vim.keymap.set("n", "<leader>ex", function() vim.diagnostic.open_float() end, opts)
