@@ -75,7 +75,7 @@ return {
         },
 
         {
-            "<leader>ps",
+            "<leader>pf",
             function()
                 Snacks.picker.files()
             end,
