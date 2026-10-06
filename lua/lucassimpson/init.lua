@@ -25,7 +25,7 @@ function R(name)
 end
 
 vim.o.guifont = "Iosevka:h13,JetBrainsMono Nerd Font:h13"
- require('matugen').setup()
+
 
 
 
