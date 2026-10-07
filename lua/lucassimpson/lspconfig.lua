@@ -59,7 +59,8 @@ function M.lspconf()
             "rust_analyzer",
             "vtsls",
             "tailwindcss",
-            "ansiblels"
+            "ansiblels",
+            "clangd"
 
 
         },
