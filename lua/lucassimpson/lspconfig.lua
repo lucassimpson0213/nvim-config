@@ -60,7 +60,8 @@ function M.lspconf()
             "vtsls",
             "tailwindcss",
             "ansiblels",
-            "clangd"
+            "clangd", 
+            "gopls"
 
 
         },
